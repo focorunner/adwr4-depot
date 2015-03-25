@@ -2,7 +2,7 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 <h1>Your Pragmatic Catalog</h1>
-<%= pluralize(session[:counter], "visits") if (session[:counter] > 5) %>
+<%= pluralize(session[:counter], "visits") %>
 <% cache ['store', Product.latest] do %>
   <% @products.each do |product| %>
     <% cache ['entry', product] do %>
