@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
-        format.html { render :new }
+        format.html { render :new, danger: 'Unable to create Product' }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
-        format.html { render :edit }
+        format.html { render :edit, danger: 'Unable to save changes' }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end

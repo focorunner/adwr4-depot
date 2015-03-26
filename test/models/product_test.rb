@@ -16,12 +16,12 @@ class ProductTest < ActiveSupport::TestCase
                           image_url:   "zzz.jpg")
     product.price = -1
     assert product.invalid?
-    assert_equal ["must be greater than or equal to 0.01"],
+    assert_equal ["price must be between $0.01 and $1000.00"],
       product.errors[:price]
 
     product.price = 0
     assert product.invalid?
-    assert_equal ["must be greater than or equal to 0.01"], 
+    assert_equal ["price must be between $0.01 and $1000.00"], 
       product.errors[:price]
 
     product.price = 1
@@ -44,6 +44,27 @@ class ProductTest < ActiveSupport::TestCase
     bad.each do |name|
       assert new_product(name).invalid?, "#{name} shouldn't be valid"
     end
+  end
+
+test "image url is not valid if not unique" do
+    product = Product.new(title: "Unique Title",
+                          description: "yyy", 
+                          price: 1, 
+                          image_url: products(:ruby).image_url)
+
+    assert product.invalid?
+    assert_equal ["has already been taken"], product.errors[:image_url]
+  end
+
+  test "image url is not valid if not unique - i18n" do
+    product = Product.new(title: "Unique Title",
+                          description: "yyy", 
+                          price: 1, 
+                          image_url: products(:ruby).image_url)
+
+    assert product.invalid?
+    assert_equal [I18n.translate('errors.messages.taken')],
+                 product.errors[:image_url]
   end
 
   test "product is not valid without a unique title" do
