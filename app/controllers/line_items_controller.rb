@@ -74,8 +74,8 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.quantity == 1
         @line_item.destroy
-        format.html {redirect_to store_url }
-        format.js
+        format.html { render 'destroy' }
+        format.js { render 'carts/destroy' if !@cart.line_items.present? }
         format.json { head :ok }
       else
         @line_item.update_attribute(:quantity, @line_item.quantity -= 1)
