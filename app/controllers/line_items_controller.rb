@@ -1,7 +1,7 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create, :decrement]
-  before_action :set_line_item, only: [:show, :edit, :update, :destroy, :decrement]
+  before_action :set_cart, only: [:create, :decrement, :increment]
+  before_action :set_line_item, only: [:show, :edit, :update, :destroy, :decrement, :increment]
 
   # GET /line_items
   # GET /line_items.json
@@ -83,6 +83,15 @@ class LineItemsController < ApplicationController
         format.js { @current_item = @line_item }
         format.json { head :ok }
       end
+    end
+  end
+
+  def increment
+  @line_item.update_attribute(:quantity, @line_item.quantity += 1)    
+    respond_to do |format|
+      format.html { redirect_to store_url }
+      format.js { @current_item = @line_item }
+      format.json { head :ok }
     end
   end
 

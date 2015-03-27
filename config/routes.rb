@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :orders
   resources :line_items do
     member do
       post 'decrement'
+      post 'increment'
     end
   end
   resources :carts
