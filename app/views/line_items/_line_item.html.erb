@@ -4,9 +4,9 @@
   <tr>
 <% end %>
     <td>
-    <%= button_to '+', increment_line_item_path(id: line_item), remote: true, style: "padding: 0px;font-size: 0.1em;" %>
+    <%= button_to '+', line_items_path(product_id: line_item.product), remote: true %>
     <%= line_item.quantity %>&times;
-    <%= button_to '-', decrement_line_item_path(id: line_item), remote: true, style: "padding: 0px;font-size: 0.1em;" %></td>
+    <%= button_to '-', decrement_line_item_path(id: line_item), remote: true %></td>
     <td><%= line_item.product.title %></td>
     <td class="item_price">
       <%= number_to_currency(line_item.total_price) %><br>

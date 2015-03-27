@@ -86,14 +86,6 @@ class LineItemsController < ApplicationController
     end
   end
 
-  def increment
-  @line_item.update_attribute(:quantity, @line_item.quantity += 1)    
-    respond_to do |format|
-      format.html { redirect_to store_url }
-      format.js { @current_item = @line_item }
-      format.json { head :ok }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
