@@ -3,7 +3,6 @@ require 'test_helper'
 class LineItemsControllerTest < ActionController::TestCase
   setup do
     @line_item = line_items(:one)
-    @line_item_three = line_items(:three)
   end
 
   test "should get index" do
@@ -15,17 +14,6 @@ class LineItemsControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
-  end
-
-  test "should create line_item via ajax" do
-    assert_difference('LineItem.count') do
-      xhr :post, :create, product_id: products(:ruby).id
-    end
-
-    assert_response :success
-    assert_select_jquery :html, '#cart' do
-      assert_select 'tr#current_item td', /Programming Ruby 1.9/
-    end
   end
 
   test "should create line_item" do
@@ -52,11 +40,21 @@ class LineItemsControllerTest < ActionController::TestCase
   end
 
   test "should destroy line_item" do
-    @line_item_three.cart = carts(:three)
     assert_difference('LineItem.count', -1) do
-      delete :destroy, id: @line_item_three
+      delete :destroy, id: @line_item
     end
 
     assert_redirected_to store_path
+  end
+
+  test "should create line_item via ajax" do
+    assert_difference('LineItem.count') do
+      xhr :post, :create, product_id: products(:ruby).id
+    end 
+
+    assert_response :success
+    assert_select_jquery :html, '#cart' do
+      assert_select 'tr#current_item td', /Programming Ruby 1.9/
+    end
   end
 end

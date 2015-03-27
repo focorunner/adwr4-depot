@@ -4,10 +4,10 @@ class ProductsControllerTest < ActionController::TestCase
   setup do
     @product = products(:one)
     @update = {
-      title:        'Lorem Ipsum',
-      description:  'Yay, this is fun!',
-      image_url:    'lorem.jpg',
-      price:        19.95
+      title:       'Lorem Ipsum',
+      description: 'Wibbles are fun!',
+      image_url:   'lorem.jpg',
+      price:       19.95
     }
   end
 
@@ -43,6 +43,14 @@ class ProductsControllerTest < ActionController::TestCase
   test "should update product" do
     patch :update, id: @product, product: @update
     assert_redirected_to product_path(assigns(:product))
+  end
+
+  test "can't delete product in cart" do
+    assert_difference('Product.count', 0) do
+      delete :destroy, id: products(:ruby)
+    end
+
+    assert_redirected_to products_path
   end
 
   test "should destroy product" do
