@@ -10,7 +10,7 @@ gem 'pry'
 gem 'jquery-rails', '~> 4.0.3'
 gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.2.11'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do

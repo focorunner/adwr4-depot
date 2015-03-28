@@ -49,3 +49,24 @@
     background:   #f8b0f8;
   }
 }
+
+#html_feed {
+  .order {
+    width: 450px;
+    border-bottom: 1px solid black;
+  }
+
+  table {
+    width: 100%;
+    text-align: center;
+
+    tr:first-child {
+      border-bottom: 1px solid black;
+    }
+
+    td, th {
+      padding: 0px 5px;
+      vertical-align: top;
+    }
+  }
+}
